@@ -1,0 +1,40 @@
+{
+  "name": "starwars-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serverless.ts",
+  "scripts": {
+    "start:dev": "nodemon --exec serverless offline --watch src",
+    "lint": "eslint src",
+    "dev": "serverless offline start --httpPort 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@serverless/typescript": "^3.38.0",
+    "@types/dotenv-safe": "^8.1.6",
+    "@types/joi": "^17.2.3",
+    "@types/node": "^18.19.55",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/parser": "^8.8.1",
+    "esbuild": "^0.14.46",
+    "eslint": "^9.12.0",
+    "nodemon": "^3.1.7",
+    "serverless": "^4.4.5",
+    "serverless-offline": "^14.3.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1162.0",
+    "axios": "^1.7.7",
+    "dotenv-safe": "^9.1.0",
+    "joi": "^17.13.3",
+    "uuid": "^8.3.2"
+  }
+}

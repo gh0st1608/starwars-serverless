@@ -1,0 +1,30 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+#custom
+backend/node_modules/
+backend/serverless.prod.ts
+backend/build/
+backend/.serverless/
+backend/.env
+
+infra/.terraform
+infra/terraform.tfstate.backup
+infra/terraform.tfstate
+infra/terraform.tfvars
+infra/.terraform.lock.hcl
