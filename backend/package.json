@@ -4,6 +4,7 @@
   "description": "",
   "main": "serverless.ts",
   "scripts": {
+    "stage:dev": "serverless deploy --stage dev",
     "start:dev": "nodemon --exec serverless offline --watch src",
     "lint": "eslint src",
     "dev": "serverless offline start --httpPort 3000",

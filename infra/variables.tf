@@ -9,3 +9,7 @@ variable "secret_key" {
 variable "region" {
   type = string
 }
+
+variable "stage" {
+  type = string
+}
