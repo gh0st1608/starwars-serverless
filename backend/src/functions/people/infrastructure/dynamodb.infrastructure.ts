@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import { Parameters } from "../core/parameters";
+import { dynamoDBOptions } from '../core/interfaces';
 import { People } from '../domain/people';
 
 export class DynamoDBRepository  {
@@ -7,16 +8,21 @@ export class DynamoDBRepository  {
   dynamoDB: AWS.DynamoDB.DocumentClient;
 
   constructor() {
-      if (DynamoDBRepository.instance) {
-          return DynamoDBRepository.instance;
-      }
-      
-      this.dynamoDB = new AWS.DynamoDB.DocumentClient({
-          endpoint: Parameters.confDynamoDB.host, // URL de LocalStack
-          region: Parameters.confAws.region,
-      });
+    if (DynamoDBRepository.instance) {
+        return DynamoDBRepository.instance;
+    }
 
-      DynamoDBRepository.instance = this;
+    const dynamoDBOptions : dynamoDBOptions = {
+        region: Parameters.confAws.region
+    };
+
+    if (process.env.NODE_ENV === 'development') {
+        dynamoDBOptions.endpoint = Parameters.confDynamoDB.endpoint; // URL de LocalStack
+    }
+    
+    this.dynamoDB = new AWS.DynamoDB.DocumentClient(dynamoDBOptions);
+
+    DynamoDBRepository.instance = this;
   }
 
   async createItem(people : People) {
@@ -35,15 +41,20 @@ export class DynamoDBRepository  {
       }
   }
 
-  async getItem(id : string) {
+  async getItem(id : string) : Promise<People> {
     const params = {
         TableName: Parameters.confDynamoDB.table, // Cambia por el nombre de tu tabla
         Key: { peopleId : id },
     };
+
     try {
-        return this.dynamoDB.get(params).promise();
+        const result = await this.dynamoDB.get(params).promise();
+        if (!result.Item) {
+           return null
+        }
+        return result.Item as People
     } catch (error) {
-        throw new Error(`Error al crear el ítem: ${error.message}`);
+        throw new Error(`Error al conseguir el ítem: ${error.message}`);
     }
 }
 }

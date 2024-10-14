@@ -9,7 +9,7 @@ export class PeopleInfrastructure implements PeopleRepository {
     AxiosSingleton.initialize(Parameters.apiStarWars.url, 1000);
     const axiosInstance = AxiosSingleton.getInstance();
     try {
-        const response = await axiosInstance.get('/people'); // Cambia el endpoint según sea necesario
+        const response = await axiosInstance.get('/people');
         return response.data
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -19,7 +19,7 @@ export class PeopleInfrastructure implements PeopleRepository {
     AxiosSingleton.initialize(Parameters.apiStarWars.url, 1000);
     const axiosInstance = AxiosSingleton.getInstance();
     try {
-        const response = await axiosInstance.get(`/people/${id}`); // Cambia el endpoint según sea necesario
+        const response = await axiosInstance.get(`/people/${id}`);
         return response.data
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -29,7 +29,7 @@ export class PeopleInfrastructure implements PeopleRepository {
     AxiosSingleton.initialize(Parameters.apiStarWars.url, 1000);
     const axiosInstance = AxiosSingleton.getInstance();
     try {
-        const response = await axiosInstance.get('/people/schema'); // Cambia el endpoint según sea necesario
+        const response = await axiosInstance.get('/people/schema');
         return response.data
     } catch (error) {
         console.error('Error fetching data:', error);

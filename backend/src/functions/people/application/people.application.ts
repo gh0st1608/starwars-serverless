@@ -10,7 +10,7 @@ export class PeopleApplication {
     return this.peopleRepository.get();
   }
 
-  async getOne(id : string) : Promise<any> {
+  async getOne(id : string) : Promise<People> {
     const itemFind = await this.dynamoDBRepository.getItem(id)
     if(!itemFind) return this.peopleRepository.getOne(id);
     return itemFind
