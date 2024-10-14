@@ -1,5 +1,4 @@
 import type { AWS } from "@serverless/typescript";
-
 import { root, getPeople, getPeopleOne, getPeopleSchema, createPeople } from "./src/functions";
 import * as path from "path";
 
@@ -8,7 +7,7 @@ const outputDir = path.join(__dirname, "dist");
 const serverlessConfiguration: AWS = {
   service: "starwars-app",
   frameworkVersion: "4",
-  plugins: ["serverless-offline"],
+  plugins: ["serverless-offline","serverless-openapi-documentation"],
   provider: {
     name: "aws",
     runtime: "nodejs20.x",
@@ -16,8 +15,11 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
-      DYNAMODB_TABLE: "PeopleTable",
-      S3_BUCKET: "bucket-swapi"
+      ENV: "dev",
+      DB_DYNAMO_ENDPOINT: "http://localhost:4566",
+      DB_DYNAMO_TABLE: "PeopleTable",
+      REGION: "us-east-1",
+      SWAPI_URL: "https://swapi.py4e.com/api"
     },
     apiGateway: {
       minimumCompressionSize: 1024,
@@ -47,7 +49,7 @@ const serverlessConfiguration: AWS = {
           {
             Effect: "Allow",
             Action: "s3:*", // Permiso para S3
-            Resource: "arn:aws:s3:::bucket-swapi/*", // Recurso del bucket
+            Resource: "arn:aws:s3:::bucket-swapi-${self:provider.stage}/*", // Recurso del bucket
           },
           {
             Effect: "Allow",
@@ -70,10 +72,17 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
       output: `${outputDir}/`
     },
-    apiGateway: {
+    /* apiGateway: {
       restApiId: "wj33urp139",
       restApiRootResourceId: "ur83wck6fa",
-    },
+    }, */
+    /*openapiDocumentation: `${file(serverless.doc.yml)}` */
+    /* documentation: {
+      version: '1',
+      title: 'My API',
+      description: 'This is my API',
+      models: {}
+    } */
   },
   functions: { root, getPeople, getPeopleOne, getPeopleSchema, createPeople },
 };

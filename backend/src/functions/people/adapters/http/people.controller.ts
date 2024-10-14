@@ -9,8 +9,8 @@ export class PeopleController {
     return await this.peopleApplication.get();
   }
 
-  async getOne(id : string) {
-    return await this.peopleApplication.getOne(id);
+  async getOne(id : string) : Promise<People> {
+    return this.peopleApplication.getOne(id);
   }
 
   async getSchema() {

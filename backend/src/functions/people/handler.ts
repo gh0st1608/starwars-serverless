@@ -25,7 +25,6 @@ export const peopleHandler = async (event) => {
 export const peopleOneHandler = async (event) => {
   const idPeople = event.pathParameters.id;
   const peopleFound = await controllerPeople.getOne(idPeople);
-  console.log('peopleFound',peopleFound)
   if(peopleFound) return {
     statusCode: 404,
     body: JSON.stringify(peopleFound),

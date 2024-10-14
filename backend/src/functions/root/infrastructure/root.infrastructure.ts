@@ -9,7 +9,6 @@ export class RootInfrastructure implements RootRepository {
     const axiosInstance = AxiosSingleton.getInstance();
     try {
         const response = await axiosInstance.get('/'); // Cambia el endpoint según sea necesario
-        console.log('res',response.data);
         return response.data
     } catch (error) {
         console.error('Error fetching data:', error);

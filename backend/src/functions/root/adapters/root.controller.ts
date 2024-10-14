@@ -4,7 +4,7 @@ import { Root } from "../domain/root";
 export class RootController {
   constructor(private rootApplication: RootApplication) {}
 
-  async get() {
-    return await this.rootApplication.get();
+  async get() : Promise<Root> {
+    return this.rootApplication.get();
   }
 }
