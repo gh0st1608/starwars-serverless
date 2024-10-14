@@ -44,10 +44,10 @@
 ## Request de pruebas locales
 
 - Obtener un personaje
-curl -X GET http://localhost:3000/api/dev/people/1
+`curl -X GET http://localhost:3000/api/dev/people/1`
 
 - Crear un nuevo personaje
-curl -X POST http://localhost:3000/api/dev/people \
+```curl -X POST http://localhost:3000/api/dev/people \
 -H "Content-Type: application/json" \
 -d '{
     "birth_year": "19 BBY",
@@ -69,7 +69,7 @@ curl -X POST http://localhost:3000/api/dev/people \
     "url": "https://swapi.py4e.com/api/people/1/",
     "vehicles": ["https://swapi.py4e.com/api/vehicles/14"]
 }'
-
+```
 - Obtener el id del personaje creado
  1. Ejecutar `aws dynamodb scan --table-name PeopleTable --endpoint-url http://localhost:4566`
  2. Extraer el valor del campo `peopleId` (Por ejemplo que sea `aabbccdd`)
