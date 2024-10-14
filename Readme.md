@@ -76,4 +76,4 @@ curl -X POST http://localhost:3000/api/dev/people \
  2. Extraer el valor del campo `peopleId` (Por ejemplo que sea `aabbccdd`)
 
 - Consultar el valor (Ejemplo)
-curl -X GET http://localhost:3000/api/dev/people/aabbccdd
+`curl -X GET http://localhost:3000/api/dev/people/aabbccdd`
