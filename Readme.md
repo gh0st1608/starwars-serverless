@@ -47,7 +47,8 @@
 `curl -X GET http://localhost:3000/api/dev/people/1`
 
 - Crear un nuevo personaje
-```curl -X POST http://localhost:3000/api/dev/people \
+```
+curl -X POST http://localhost:3000/api/dev/people \
 -H "Content-Type: application/json" \
 -d '{
     "birth_year": "19 BBY",
