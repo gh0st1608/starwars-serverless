@@ -40,7 +40,7 @@
 1. Ubicarse en la carpeta `backend` y ejecutar `npm install`, para instalar dependencias.
 2. Ejecutar `npm run deploy:dev` para desplegar el proyecto serverless en la nube.
 
-
+-------------------------------------------------------------------------------------------
 ## Request de pruebas locales
 
 - Obtener un personaje
