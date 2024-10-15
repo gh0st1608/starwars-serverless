@@ -1,28 +1,32 @@
 import { getPathHandler } from "../libs/getPathHandler";
-export default {
+export const getRoot = {
   handler: `${getPathHandler(__dirname)}/handler.rootHandler`,
   events: [
     {
       http: {
         method: "get",
-        path: "/root",
-        /*documentation: {
+        path: "root",
+        documentation: {
           summary: "Get Root",
-          description: "Gets Resources and then sends a generated password email",
+          tag: "Root",
+          description: "Gets Resources",
           requestBody: {
-            description: "A user information object"
+            description: "A root information object"
           },
+          requestModels: {},
           methodResponses: [
             {
-              statusCode: 201,
-              responseBody: { description: "A user object along with generated API Keys"}
+              statusCode: 200,
+              responseBody: { description: "Operation sucessfull"},
+              responseModels: { "application/json" : "SucessfullResponse"}
             },
             {
               statusCode: 500,
-              responseBody: { description: "A user object along with generated API Keys"}
+              responseBody: { description: "Operation failed"},
+              responseModels: { "application/json" : "ErrorResponse"}
             }
           ]  
-        }*/
+        }
       },
     },
   ],

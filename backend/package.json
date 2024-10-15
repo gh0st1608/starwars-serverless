@@ -7,6 +7,7 @@
     "stage:dev": "serverless deploy --stage dev",
     "stage:stg": "serverless deploy --stage stg",
     "start:dev": "nodemon --exec serverless offline --watch src",
+    "doc": "serverless openapi generate",
     "lint": "eslint src",
     "dev": "serverless offline start --httpPort 3000",
     "test": "echo \"Error: no test specified\" && exit 1"

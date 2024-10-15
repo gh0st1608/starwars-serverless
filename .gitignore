@@ -22,6 +22,7 @@ backend/serverless.prod.ts
 backend/build/
 backend/.serverless/
 backend/.env
+backend/openapi.yml
 
 infra/.terraform
 infra/terraform.tfstate.backup

@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "A message describing the error.",
+        "example": "operation failed"
+      },
+      "code": {
+        "type": "integer",
+        "description": "HTTP status code representing the error.",
+        "example": 500
+      },
+      "status": {
+        "type": "string",
+        "description": "Status of the response, e.g., 'fail' or 'error'.",
+        "example": "fail"
+      }
+    },
+    "required": ["message", "code", "status"]
+  }
