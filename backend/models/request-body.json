@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "birth_year": {
+        "type": "string",
+        "description": "birth_year",
+        "example": "19 BBY"
+      },
+      "eye_color": {
+        "type": "string",
+        "description": "eye_color",
+        "example": "Blue"
+      },
+      "films": {
+        "type": "string",
+        "description": "films",
+        "example" : "https://swapi.py4e.com/api/films/1"
+      },
+      "gender": {
+        "type": "string",
+        "description": "gender",
+        "example": "Male"
+      },
+      "hair_color": {
+        "type": "string",
+        "description": "hair_color",
+        "example": "Blond"
+      },
+      "height": {
+        "type": "string",
+        "description": "height",
+        "example": "172"
+      },
+      "homeworld": {
+        "type": "string",
+        "description": "homeworld",
+        "example": "https://swapi.py4e.com/api/planets/1/"
+      },
+      "mass": {
+        "type": "string",
+        "description": "mass",
+        "example": "77"
+      },
+      "name": {
+        "type": "string",
+        "description": "name",
+        "example": "test"
+      },
+      "skin_color": {
+        "type": "string",
+        "description": "skin_color",
+        "example": "Fair"
+      },
+      "created": {
+        "type": "string",
+        "description": "created",
+        "example": "2024-12-09T13:50:51.644000Z"
+      },
+      "edited": {
+        "type": "string",
+        "description": "edited",
+        "example": "2024-12-09T13:50:51.644000Z"
+      },
+      "species": {
+        "type": "string",
+        "description": "species",
+        "example": "https://swapi.py4e.com/api/species/1/"
+      },
+      "starships": {
+        "type": "string",
+        "description": "starships",
+        "example": "https://swapi.py4e.com/api/starships/12/"
+      },
+      "url": {
+        "type": "string",
+        "description": "url",
+        "example": "https://swapi.py4e.com/api/people/1/"
+      },
+      "vehicles": {
+        "type": "string",
+        "description": "vehicles",
+        "example": "https://swapi.py4e.com/api/vehicles/14"
+      }
+    },
+    "required": ["birth_year", "eye_color", "films", "gender","hair_color","height","homeworld","mass","name","skin_color","created","edited","species","starships","url","vehicles"]
+}

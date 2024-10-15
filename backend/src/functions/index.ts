@@ -1,2 +1,2 @@
-export { default as root } from "./root";
+export { getRoot } from "./root";
 export { getPeople, getPeopleOne, getPeopleSchema, createPeople } from './people'
