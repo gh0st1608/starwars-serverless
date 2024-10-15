@@ -77,3 +77,8 @@ curl -X POST http://localhost:3000/api/dev/people \
 
 - Consultar el valor (Ejemplo)
 `curl -X GET http://localhost:3000/api/dev/people/aabbccdd`
+
+------------------------------------------------------------------
+## Generar Documentacion formato YAML
+1. Ubicarse en la carpeta `backend` y ejecutar `npm run doc`, para generar la documentacion.
+2. Copiar el codigo generado en el archivo `openapi.yaml` y pegarlo en el editor [swagger](https://editor.swagger.io/)
