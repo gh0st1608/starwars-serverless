@@ -1,9 +1,9 @@
 > **Requerimientos**:
- - Instalar AWS Cli
- - Instalar Docker y Docker-compose
- - Instalar Terraform
- - Instalar Node Js
- - Instalar Serverless Framework
+ - Instalar AWS Cli v2.15.48 y Python/3.11.8
+ - Instalar Docker y Docker-compose v26.0.0,
+ - Instalar Terraform v1.9.0
+ - Instalar Node Js v20.13.1
+ - Instalar Serverless Framework v4.4.6
 
 ## Deploy Local (Offline)
 0. Clonar el repositorio
