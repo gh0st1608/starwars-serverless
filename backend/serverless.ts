@@ -10,17 +10,17 @@ const outputDir = path.join(__dirname, "dist");
 const serverlessConfiguration: AWS = {
   service: "starwars-app",
   frameworkVersion: "4",
-  plugins: ["serverless-offline","serverless-openapi-documentation"],
+  plugins: ["serverless-offline", "serverless-openapi-documentation", "serverless-localstack"],
   provider: {
     name: "aws",
     runtime: "nodejs20.x",
-    stage: "${opt:stage, 'dev'}", // Establecido a dev para uso local
+    stage: "${opt:stage, 'dev'}",
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
-      ENV: "dev",
+      ENV: "${self:provider.stage}",
       DB_DYNAMO_ENDPOINT: "http://localhost:4566",
-      DB_DYNAMO_TABLE: "PeopleTable",
+      DB_DYNAMO_TABLE: "peopleTable-${self:provider.stage}",
       REGION: "us-east-1",
       SWAPI_URL: "https://swapi.py4e.com/api"
     },
@@ -45,19 +45,19 @@ const serverlessConfiguration: AWS = {
             Resource: "arn:aws:logs:*:*:*",
           },
           {
-            "Effect": "Allow",
-            "Action": "ssm:GetParameter",
-            "Resource": "*"
+            Effect: "Allow",
+            Action: "ssm:GetParameter",
+            Resource: "*",
           },
           {
             Effect: "Allow",
-            Action: "s3:*", // Permiso para S3
-            Resource: "arn:aws:s3:::bucket-swapi-${self:provider.stage}/*", // Recurso del bucket
+            Action: "s3:*",
+            Resource: "arn:aws:s3:::bucket-swapi-${self:provider.stage}/*",
           },
           {
             Effect: "Allow",
             Action: "dynamodb:*",
-            Resource: "arn:aws:dynamodb:us-east-1:*:table/PeopleTable",
+            Resource: "arn:aws:dynamodb:us-east-1:*:table/peopleTable-${self:provider.stage}",
           },
         ],
       },
@@ -66,6 +66,7 @@ const serverlessConfiguration: AWS = {
   
   package: { individually: true },
   custom: {
+    //localstack: { stages: 'local', host: 'http://localhost', edgePort: 4566 },
     esbuild: {
       bundle: true,
       minify: true,
@@ -73,46 +74,35 @@ const serverlessConfiguration: AWS = {
       exclude: ["aws-sdk"],
       platform: "node",
       concurrency: 10,
-      output: `${outputDir}/`
+      output: `${outputDir}/`,
     },
-    documentation : {
+    documentation: {
       version: '1',
       title: 'StarWars Serverless API',
       description: 'Serverless API',
-      models : [
+      models: [
         {
-        name : "ErrorResponse",
-        description: "This is an error",
-        contentType: "application/json",
-        schema: ErrorResponse
+          name: "ErrorResponse",
+          description: "This is an error",
+          contentType: "application/json",
+          schema: ErrorResponse,
         },
         {
-        name: "SucessfullResponse",
-        description: "Sucessfull operation",
-        contentType: "application/json",
-        schema: SuccessResponse
+          name: "SuccessfulResponse",
+          description: "Successful operation",
+          contentType: "application/json",
+          schema: SuccessResponse,
         },
         {
-        name: "BodyPeopleRequest",
-        description: "post operation",
-        contentType: "application/json",
-        schema: RequestBody
-        }
+          name: "BodyPeopleRequest",
+          description: "Post operation",
+          contentType: "application/json",
+          schema: RequestBody,
+        },
       ],
       typescriptApiPath: 'api.d.ts',
-      tsconfigPath: 'tsconfig.json'
-    }
-    /* apiGateway: {
-      restApiId: "wj33urp139",
-      restApiRootResourceId: "ur83wck6fa",
-    }, */
-    /*openapiDocumentation: `${file(serverless.doc.yml)}` */
-    /* documentation: {
-      version: '1',
-      title: 'My API',
-      description: 'This is my API',
-      models: {}
-    } */
+      tsconfigPath: 'tsconfig.json',
+    },
   },
   functions: { getRoot, getPeople, getPeopleOne, getPeopleSchema, createPeople },
 };

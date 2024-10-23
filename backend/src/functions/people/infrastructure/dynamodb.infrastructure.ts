@@ -1,7 +1,8 @@
 import AWS from 'aws-sdk';
 import { Parameters } from "../core/parameters";
-import { dynamoDBOptions } from '../core/interfaces';
+import { DynamoDBOptions } from '../core/interfaces';
 import { People } from '../domain/people';
+import { err, ok, Result } from 'neverthrow'
 
 export class DynamoDBRepository  {
   static instance: any;
@@ -12,11 +13,11 @@ export class DynamoDBRepository  {
         return DynamoDBRepository.instance;
     }
 
-    const dynamoDBOptions : dynamoDBOptions = {
+    const dynamoDBOptions : DynamoDBOptions = {
         region: Parameters.confAws.region
     };
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.ENV === 'dev') {
         dynamoDBOptions.endpoint = Parameters.confDynamoDB.endpoint; // URL de LocalStack
     }
     
@@ -26,7 +27,7 @@ export class DynamoDBRepository  {
   }
 
   async createItem(people : People) {
-    const { id, ...item } = people
+    const { id, ...item } = people.properties()
       const params = {
           TableName: Parameters.confDynamoDB.table, // Cambia por el nombre de tu tabla
           Item: {
@@ -41,7 +42,7 @@ export class DynamoDBRepository  {
       }
   }
 
-  async getItem(id : string) : Promise<People> {
+  async getItem(id : string) : Promise<Result<People,Error>> {
     const params = {
         TableName: Parameters.confDynamoDB.table, // Cambia por el nombre de tu tabla
         Key: { peopleId : id },
@@ -50,9 +51,9 @@ export class DynamoDBRepository  {
     try {
         const result = await this.dynamoDB.get(params).promise();
         if (!result.Item) {
-           return null
+           return err(new Error('Error fetching data'))
         }
-        return result.Item as People
+        return ok(result.Item as People)
     } catch (error) {
         throw new Error(`Error al conseguir el ítem: ${error.message}`);
     }

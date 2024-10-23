@@ -3,26 +3,32 @@ import { FindList } from "../core/interfaces";
 import { AxiosSingleton } from "../core/providers"
 import { Parameters } from "../core/parameters/index"
 import { PeopleRepository } from "../domain/repositories/people.repository";
+import { Result, ok, err } from 'neverthrow';
 
 export class PeopleInfrastructure implements PeopleRepository {
-  async get(): Promise<FindList<People>> {
+  async get(): Promise<Result<FindList<People>,Error>> {
     AxiosSingleton.initialize(Parameters.apiStarWars.url, 1000);
     const axiosInstance = AxiosSingleton.getInstance();
     try {
         const response = await axiosInstance.get('/people');
-        return response.data
+        const findListResponse: FindList<People> = {
+          data: response.data.results, // Mapea los resultados
+          count: response.data.count   // Obtiene el conteo total
+      };
+      return ok(findListResponse);
     } catch (error) {
-        console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error);
+      return err(new Error('Error fetching data'))
     }
   }
-  async getOne(id : string): Promise<People> {
+  async getOne(id : string): Promise<Result<People,Error>> {
     AxiosSingleton.initialize(Parameters.apiStarWars.url, 1000);
     const axiosInstance = AxiosSingleton.getInstance();
     try {
         const response = await axiosInstance.get(`/people/${id}`);
-        return response.data
+        return ok(response.data as People)
     } catch (error) {
-        console.error('Error fetching data:', error);
+      return err(new Error('Error fetching data'))
     }
   }
   async getSchema(): Promise<any> {

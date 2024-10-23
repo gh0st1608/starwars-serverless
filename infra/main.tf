@@ -1,5 +1,6 @@
 module "dynamodb" {
   source = "./dynamodb"
+  dynamo_stage = var.stage
 }
 
 module "s3" {

@@ -1,0 +1,18 @@
+{
+    "films": ["https://swapi.py4e.com/api/films/1"],
+    "homeworld": "https://swapi.py4e.com/api/planets/1/",
+    "gender": "Male",
+    "skin_color": "Fair",
+    "created": "2024-10-23T06:46:24.193Z",
+    "mass": "77",
+    "vehicles": ["https://swapi.py4e.com/api/vehicles/14"],
+    "url": "https://swapi.py4e.com/api/people/1/",
+    "hair_color": "Blond",
+    "birth_year": "19 BBY",
+    "eye_color": "Blue",
+    "species": ["https://swapi.py4e.com/api/species/1/"],
+    "starships": ["https://swapi.py4e.com/api/starships/12/"],
+    "name": "test8",
+    "height": "172"
+  }
+  

@@ -1,8 +1,4 @@
 export interface RootFieldsRequired {
-  readonly resource: Object;
-}
-
-export class Resource {
   readonly films : string;
   readonly people : string;
   readonly planets : string;
@@ -11,10 +7,28 @@ export class Resource {
   readonly vehicles : string;
 }
 
-export type FieldsRequired = Required<Resource>;
+export type RootPropiertes = Required<RootFieldsRequired>;
 
 export class Root {
-  constructor(properties: FieldsRequired) {
+  private films : string;
+  private people : string;
+  private planets : string;
+  private species : string;
+  private starships : string;
+  private vehicles : string;
+  
+  constructor(properties: RootPropiertes) {
     Object.assign(this, properties);
+  }
+
+  properties(): RootPropiertes {
+    return {
+      films: this.films,
+      people: this.people,
+      planets: this.planets,
+      species: this.species,
+      starships: this.starships,
+      vehicles: this.vehicles,
+    };
   }
 }
