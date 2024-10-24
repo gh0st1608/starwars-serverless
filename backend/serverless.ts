@@ -80,7 +80,7 @@ const serverlessConfiguration: AWS = {
     },
     documentation: {
       version: '1',
-      title: 'StarWars Serverless API v2',
+      title: 'StarWars Serverless API v3',
       description: 'Serverless API',
       models: [
         {

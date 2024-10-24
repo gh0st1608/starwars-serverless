@@ -165,7 +165,7 @@ components:
         - vehicles
   securitySchemes: {}
 info:
-  title: StarWars Serverless API
+  title: StarWars Serverless API v2
   description: Serverless API
   version: '1'
 paths:
