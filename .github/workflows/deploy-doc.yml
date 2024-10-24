@@ -1,0 +1,35 @@
+name: Deploy OpenAPI Documentation
+
+on:
+  push:
+    paths:
+      - 'backend/openapi.yml'  # Activa el workflow solo si se actualiza openapi.yml
+      - 'backend/index.html'    # Incluye esto si también puedes actualizar index.html
+      
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Cambia esto según sea necesario
+
+      - name: Build Swagger UI
+        run: |
+          mkdir -p public
+          cp backend/openapi.yml public/
+          cp backend/index.html public/
+        
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
