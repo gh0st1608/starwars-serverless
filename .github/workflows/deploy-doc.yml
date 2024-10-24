@@ -5,6 +5,9 @@ on:
     paths:
       - 'backend/openapi.yml'  # Activa el workflow solo si se actualiza openapi.yml
       - 'backend/index.html'    # Incluye esto si también puedes actualizar index.html
+      
+permissions:
+  contents: write
 
 jobs:
   deploy:
