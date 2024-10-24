@@ -7,9 +7,6 @@ region = "us-east-1"
 access_key = "your_access_key_here"
 secret_key = "your_secret_key_here"
 
-# S3 bucket name
-bucket_name = "example-bucket-name"
-
 # Environment
 stage="example-env" # "dev" "stg" "prod"
 
