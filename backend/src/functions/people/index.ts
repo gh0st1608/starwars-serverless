@@ -23,9 +23,9 @@ export const getPeople = {
               responseModels: { "application/json" : "SucessfullResponse"}
             },
             {
-              statusCode: 500,
+              statusCode: 404,
               responseBody: { description: "Operation failed"},
-              responseModels: { "application/json" : "ErrorResponse"}
+              responseModels: { "application/json" : "NotFound"}
             }
           ]  
         }
@@ -57,11 +57,10 @@ export const getPeopleOne = {
           pathParams: {
             name : "id",
             description: "The people id for a get one people",
-            schema: { type: "string" }
-            /* schema: {
+            schema: {
                 type: "string",
                 pattern: "^[0-9_]+$"
-            }   */  
+            } 
           },
           methodResponses: [
             {
@@ -70,9 +69,14 @@ export const getPeopleOne = {
               responseModels: { "application/json" : "SucessfullResponse"}
             },
             {
-              statusCode: 500,
+              statusCode: 404,
               responseBody: { description: "Operation failed"},
-              responseModels: { "application/json" : "ErrorResponse"}
+              responseModels: { "application/json" : "NotFound"}
+            },
+            {
+              statusCode: 400,
+              responseBody: { description: "Operation failed"},
+              responseModels: { "application/json" : "BadRequest"}
             }
           ]  
         }
@@ -104,9 +108,9 @@ export const getPeopleSchema = {
               responseModels: { "application/json" : "SucessfullResponse"}
             },
             {
-              statusCode: 500,
+              statusCode: 404,
               responseBody: { description: "Operation failed"},
-              responseModels: { "application/json" : "ErrorResponse"}
+              responseModels: { "application/json" : "NotFound"}
             }
           ]  
         }
@@ -138,9 +142,14 @@ export const createPeople = {
               responseModels: { "application/json" : "SucessfullResponse"}
             },
             {
-              statusCode: 500,
+              statusCode: 404,
               responseBody: { description: "Operation failed"},
-              responseModels: { "application/json" : "ErrorResponse"}
+              responseModels: { "application/json" : "NotFound"}
+            },
+            {
+              statusCode: 400,
+              responseBody: { description: "Operation failed"},
+              responseModels: { "application/json" : "BadRequest"}
             }
           ]  
         }

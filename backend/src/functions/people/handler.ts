@@ -8,6 +8,7 @@ import { PeopleCreateDto }  from './adapters/dtos/people.create.dto';
 import { validate } from "class-validator";
 import { plainToClass } from 'class-transformer';
 import { People } from "./domain/people";
+import { HTTP_STATUS_CODES, HTTP_MESSAGES, HTTP_STATUS } from './core/helpers/response-http'
 
 
 const repositoryPeople: PeopleRepository = new PeopleInfrastructure();
@@ -21,10 +22,10 @@ const controllerPeople: PeopleController = new PeopleController(
 
 export const peopleHandler = async () : Promise<ResponseHttp> => {
   const peopleList = await controllerPeople.get();
-  if(peopleList.isOk()) return { statusCode: 200, body: JSON.stringify(peopleList.value) }
+  if(peopleList.isOk()) return { statusCode: HTTP_STATUS_CODES.OK, body: JSON.stringify(peopleList.value) }
   return {
     statusCode: 404,
-    body: JSON.stringify({message : 'listPeople not found'}),
+    body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
   };
 };
 
@@ -34,15 +35,16 @@ export const peopleOneHandler = async (event) : Promise<ResponseHttp> => {
   if(peopleFound.isOk()) return { statusCode: 200, body: JSON.stringify(peopleFound.value)};
   return {
     statusCode: 404,
-    body: JSON.stringify({}),
+    body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
   };
 };
 
 export const peopleSchemaHandler = async () => {
   const peopleSchemaFound = await controllerPeople.getSchema();
+  if(peopleSchemaFound.isOk()) return { statusCode: 200, body: JSON.stringify(peopleSchemaFound.value) }
   return {
-    statusCode: 200,
-    body: JSON.stringify(peopleSchemaFound),
+    statusCode: 404,
+    body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
   };
 };
 
@@ -55,11 +57,9 @@ export const peopleCreateHandler = async (event) => {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: 'Validation failed',
-        errors: errors.map(error => ({
-          property: error.property,
-          constraints: error.constraints,
-        })),
+        message: HTTP_MESSAGES.VALIDATION_FAILED,
+        code: HTTP_STATUS_CODES.BAD_REQUEST,
+        error: errors.map(error => ({property: error.property, constraints: error.constraints})),
       }),
     };
   }
@@ -70,7 +70,7 @@ export const peopleCreateHandler = async (event) => {
   
   return {
     statusCode: 200,
-    body: JSON.stringify({ message : 'created sucessfully'}),
+    body: JSON.stringify({message : HTTP_MESSAGES.PEOPLE_RESOURCE_CREATED, code: HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFUL_CREATE_OPERATION}),
   };
 };
 

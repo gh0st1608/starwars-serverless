@@ -1,5 +1,7 @@
 import type { AWS } from "@serverless/typescript";
-import ErrorResponse from "./models/error-response.json";
+import BadRequest from "./models/bad-request.json";
+import InternalServerError from "./models/internal-server-error.json";
+import NotFound from "./models/not-found.json";
 import SuccessResponse from "./models/success.response.json";
 import RequestBody from "./models/request-body.json";
 import { getRoot, getPeople, getPeopleOne, getPeopleSchema, createPeople } from "./src/functions";
@@ -82,10 +84,22 @@ const serverlessConfiguration: AWS = {
       description: 'Serverless API',
       models: [
         {
-          name: "ErrorResponse",
+          name: "BadRequest",
           description: "This is an error",
           contentType: "application/json",
-          schema: ErrorResponse,
+          schema: BadRequest,
+        },
+        {
+          name: "InternalServerError",
+          description: "This is an error",
+          contentType: "application/json",
+          schema: InternalServerError,
+        },
+        {
+          name: "NotFound",
+          description: "This is an error",
+          contentType: "application/json",
+          schema: NotFound,
         },
         {
           name: "SuccessfulResponse",
