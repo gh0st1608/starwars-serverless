@@ -22,7 +22,7 @@ const controllerPeople: PeopleController = new PeopleController(
 
 export const peopleHandler = async () : Promise<ResponseHttp> => {
   const peopleList = await controllerPeople.get();
-  if(peopleList.isOk()) return { statusCode: HTTP_STATUS_CODES.OK, body: JSON.stringify(peopleList.value) }
+  if(peopleList.isOk()) return { statusCode: HTTP_STATUS_CODES.OK, body: JSON.stringify({message : peopleList.value, code : HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFULL_GET_OPERATION})}
   return {
     statusCode: 404,
     body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
@@ -32,7 +32,7 @@ export const peopleHandler = async () : Promise<ResponseHttp> => {
 export const peopleOneHandler = async (event) : Promise<ResponseHttp> => {
   const idPeople = event.pathParameters.id;
   const peopleFound = await controllerPeople.getOne(idPeople);
-  if(peopleFound.isOk()) return { statusCode: 200, body: JSON.stringify(peopleFound.value)};
+  if(peopleFound.isOk()) return { statusCode: 200, body: JSON.stringify({message: peopleFound.value, code: HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFULL_GET_OPERATION})};
   return {
     statusCode: 404,
     body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
@@ -41,7 +41,7 @@ export const peopleOneHandler = async (event) : Promise<ResponseHttp> => {
 
 export const peopleSchemaHandler = async () => {
   const peopleSchemaFound = await controllerPeople.getSchema();
-  if(peopleSchemaFound.isOk()) return { statusCode: 200, body: JSON.stringify(peopleSchemaFound.value) }
+  if(Object.entries(peopleSchemaFound).length > 0) return { statusCode: 200, body: JSON.stringify({message : peopleSchemaFound, code : HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFULL_GET_OPERATION}) }
   return {
     statusCode: 404,
     body: JSON.stringify({message : HTTP_MESSAGES.NOT_FOUND, code: HTTP_STATUS_CODES.NOT_FOUND, status: HTTP_STATUS.ERROR}),
@@ -70,7 +70,7 @@ export const peopleCreateHandler = async (event) => {
   
   return {
     statusCode: 200,
-    body: JSON.stringify({message : HTTP_MESSAGES.PEOPLE_RESOURCE_CREATED, code: HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFUL_CREATE_OPERATION}),
+    body: JSON.stringify({message : HTTP_MESSAGES.PEOPLE_RESOURCE_CREATED, code: HTTP_STATUS_CODES.OK, status: HTTP_STATUS.SUCCESSFULL_POST_OPERATION}),
   };
 };
 

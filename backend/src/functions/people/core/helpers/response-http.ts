@@ -14,7 +14,9 @@ export const HTTP_STATUS_CODES = {
 
   export const HTTP_STATUS = {
     ERROR: 'Error',
-    SUCCESSFUL_CREATE_OPERATION: 'Successfull create operation',
-
+    SUCCESSFULL_POST_OPERATION: 'Successfull create operation',
+    SUCCESSFULL_GET_OPERATION: 'Successfull get operation',
+    SUCCESSFULL_DELETE_OPERATION: 'Successfull delete operation',
+    SUCCESSFULL_PUT_OPERATION: 'Successfull put operation'
     // Otros mensajes...
   };
