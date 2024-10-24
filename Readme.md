@@ -113,3 +113,6 @@ curl -X POST http://localhost:3000/api/dev/people \
 1. Ubicarse en la carpeta `backend` y ejecutar `npm run doc`, para generar la documentacion.
 2. Copiar el codigo generado del archivo `openapi.yaml` y pegarlo en el editor [swagger](https://editor.swagger.io/)
 3. Opcional: Visualizar el swagger en el url: `https://gh0st1608.github.io/starwars-serverless`
+
+## Pruebas Unitarias
+1. Ubicarse en la carpeta `backend` y ejecutar `npm run test`
