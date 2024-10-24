@@ -221,6 +221,13 @@ paths:
       operationId: getPeopleOne
       summary: Get People by Id
       description: Get One People
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the person to retrieve
+        schema:
+          type: string
       responses:
         '200':
           description: Operation sucessfull
