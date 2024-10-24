@@ -11,4 +11,4 @@ secret_key = "your_secret_key_here"
 stage="example-env" # "dev" "stg" "prod"
 
 #Generator service
-provider="localstack" # "aws" si es propiamente aws  o "localstack" si es un simulador de aws
+service="localstack" # "aws" si es propiamente aws  o "localstack" si es un simulador de aws

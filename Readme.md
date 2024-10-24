@@ -23,9 +23,9 @@
 4. Ubicarse en la carpeta `infra` y ejecutar respectivamente `terraform init` y luego `terraform apply -auto-approve`.
 
 ## Validar la creacion de infrastructura localstack:
-1. lista tablas de dynamoDb `aws dynamodb list-tables --endpoint-url=http://localhost:4566`
-2. listar parametros `aws ssm describe-parameters --endpoint-url=http://localhost:4566`
-3. listar bucket despliegue `aws s3 ls --endpoint-url=http://localhost:4566`
+1. lista tablas de dynamoDb `aws dynamodb list-tables --profile NOMBRE_DEL_PERFIL --endpoint-url=http://localhost:4566`
+2. listar parametros `aws ssm describe-parameters --profile NOMBRE_DEL_PERFIL --endpoint-url=http://localhost:4566`
+3. listar bucket despliegue `aws s3 ls --profile NOMBRE_DEL_PERFIL --endpoint-url=http://localhost:4566`
 
 ## Pasos para la aplicacion:
 1. Ubicarse en la carpeta `backend` y ejecutar `npm install`, para instalar dependencias.
@@ -67,7 +67,8 @@
 
 ## Pasos para la aplicacion:
 1. Ubicarse en la carpeta `backend` y ejecutar `npm install`, para instalar dependencias.
-2. Ejecutar `npm run deploy:dev` para desplegar el proyecto serverless en la nube.
+2. Mantener la configuracion del archivo `serverless.ts` en la seccion `provider.environment` tal como se hizo en el deploy local.
+3. Ejecutar `npm run deploy:stg` para desplegar el proyecto serverless en la nube.
 
 -------------------------------------------------------------------------------------------
 ## Request de pruebas locales
@@ -110,4 +111,5 @@ curl -X POST http://localhost:3000/api/dev/people \
 ------------------------------------------------------------------
 ## Generar Documentacion formato YAML
 1. Ubicarse en la carpeta `backend` y ejecutar `npm run doc`, para generar la documentacion.
-2. Copiar el codigo generado en el archivo `openapi.yaml` y pegarlo en el editor [swagger](https://editor.swagger.io/)
+2. Copiar el codigo generado del archivo `openapi.yaml` y pegarlo en el editor [swagger](https://editor.swagger.io/)
+3. Opcional: Visualizar el swagger en el url: `https://gh0st1608.github.io/starwars-serverless`

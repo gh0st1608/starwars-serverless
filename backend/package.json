@@ -4,7 +4,7 @@
   "description": "",
   "main": "serverless.ts",
   "scripts": {
-    "stage:stg": "serverless deploy --stage stg",
+    "deploy:stg": "serverless deploy --stage stg",
     "start:dev": "nodemon --exec serverless offline --watch src",
     "doc": "serverless openapi generate",
     "lint": "eslint src",
