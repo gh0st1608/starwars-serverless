@@ -14,6 +14,6 @@ variable "stage" {
   type = string
 }
 
-variable "provider" {
+variable "service" {
   type = string
 }
