@@ -22,7 +22,7 @@ backend/serverless.prod.ts
 backend/build/
 backend/.serverless/
 backend/.env
-backend/openapi.yml
+#backend/openapi.yml
 backend/notas.txt
 backend/coverage/
 

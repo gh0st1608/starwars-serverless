@@ -1,0 +1,254 @@
+openapi: 3.0.0
+components:
+  schemas:
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Un mensaje que describe el status.
+          example: operation failed
+        code:
+          type: integer
+          description: Codigo de status HTTP que representa el status.
+          example: 400
+        status:
+          type: string
+          description: El servidor no puede o no quiere procesar la solicitud
+          example: bad request
+      required:
+        - message
+        - code
+        - status
+    InternalServerError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Un mensaje que describe el status.
+          example: operation failed
+        code:
+          type: integer
+          description: Codigo de status HTTP que representa el status.
+          example: 500
+        status:
+          type: string
+          description: El servidor ha encontrado una situación que no sabe cómo manejar.
+          example: fail
+      required:
+        - message
+        - code
+        - status
+    NotFound:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Un mensaje que describe el status.
+          example: operation failed
+        code:
+          type: integer
+          description: Codigo de status HTTP que representa el status.
+          example: 404
+        status:
+          type: string
+          description: >-
+            El servidor no puede procesar la solicitud debido a un error del
+            cliente.
+          example: not found
+      required:
+        - message
+        - code
+        - status
+    SuccessfulResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Un mensaje que describe el status.
+          example: operation success
+        code:
+          type: integer
+          description: Codigo de status HTTP que representa el status.
+          example: 200
+        status:
+          type: string
+          description: La solicitud se realizó correctamente.
+          example: success
+      required:
+        - message
+        - code
+        - status
+    BodyPeopleRequest:
+      type: object
+      properties:
+        birth_year:
+          type: string
+          description: birth_year
+          example: 19 BBY
+        eye_color:
+          type: string
+          description: eye_color
+          example: Blue
+        films:
+          type: string
+          description: films
+          example: 'https://swapi.py4e.com/api/films/1'
+        gender:
+          type: string
+          description: gender
+          example: Male
+        hair_color:
+          type: string
+          description: hair_color
+          example: Blond
+        height:
+          type: string
+          description: height
+          example: '172'
+        homeworld:
+          type: string
+          description: homeworld
+          example: 'https://swapi.py4e.com/api/planets/1/'
+        mass:
+          type: string
+          description: mass
+          example: '77'
+        name:
+          type: string
+          description: name
+          example: test
+        skin_color:
+          type: string
+          description: skin_color
+          example: Fair
+        created:
+          type: string
+          description: created
+          example: '2024-12-09T13:50:51.644000Z'
+        edited:
+          type: string
+          description: edited
+          example: '2024-12-09T13:50:51.644000Z'
+        species:
+          type: string
+          description: species
+          example: 'https://swapi.py4e.com/api/species/1/'
+        starships:
+          type: string
+          description: starships
+          example: 'https://swapi.py4e.com/api/starships/12/'
+        url:
+          type: string
+          description: url
+          example: 'https://swapi.py4e.com/api/people/1/'
+        vehicles:
+          type: string
+          description: vehicles
+          example: 'https://swapi.py4e.com/api/vehicles/14'
+      required:
+        - birth_year
+        - eye_color
+        - films
+        - gender
+        - hair_color
+        - height
+        - homeworld
+        - mass
+        - name
+        - skin_color
+        - created
+        - edited
+        - species
+        - starships
+        - url
+        - vehicles
+  securitySchemes: {}
+info:
+  title: StarWars Serverless API
+  description: Serverless API
+  version: '1'
+paths:
+  /root:
+    get:
+      operationId: getRoot
+      summary: Get Root
+      description: Gets Resources
+      responses:
+        '200':
+          description: Operation sucessfull
+          content: {}
+        '500':
+          description: Operation failed
+          content: {}
+  /people:
+    get:
+      operationId: getPeople
+      summary: Get People
+      description: Gets List People
+      responses:
+        '200':
+          description: Operation sucessfull
+          content: {}
+        '404':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+    post:
+      operationId: createPeople
+      summary: Create One People
+      description: Create One People
+      responses:
+        '200':
+          description: Operation sucessfull
+          content: {}
+        '400':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+  '/people/{id}':
+    get:
+      operationId: getPeopleOne
+      summary: Get People by Id
+      description: Get One People
+      responses:
+        '200':
+          description: Operation sucessfull
+          content: {}
+        '400':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+  /people/schema:
+    get:
+      operationId: getPeopleSchema
+      summary: Get Schema People
+      description: Get Schema People
+      responses:
+        '200':
+          description: Operation sucessfull
+          content: {}
+        '404':
+          description: Operation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
