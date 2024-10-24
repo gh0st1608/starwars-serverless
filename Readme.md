@@ -8,22 +8,38 @@
 ## Deploy Local (Offline)
 0. Clonar el repositorio
 
+## Configuracion AWS
+1. Ejecutar `aws configure --profile NOMBRE_DEL_PERFIL` donde "NOMBRE_DEL_PERFIL" es el perfil de despliegue con localstack.
+2. Ingresar las credenciales respectivas : 
+    - access_key
+    - secret_key
+    - region
+    - ouput format
+
 ## Pasos para la infrastructura: 
 1. Ubicarse en la raiz del proyecto y ejecutar `docker-compose up -d`, esto creara localmente con `localstack` los servicios de dynamodb, s3 y ssm.
 2. Descomentar la seccion comentada del archivo `providers.tf` y segiudamente comentar la seccion `terraform` del mismo archivo.
-3. Renombrar el archivo `terraform.tfvars.example` a `terraform.tfvars` y completar las variables `access_key` y `access_key` con el valor de `test` en ambos casos, adicionalmente completar `stage` con el valor `dev`.
+3. Renombrar el archivo `terraform.tfvars.example` a `terraform.tfvars` y completar las variables `access_key` y `secret_key` con el valor de `test` en ambos casos, `region` con el valor `us-east-1`, adicionalmente completar `stage` con el valor `dev` y `provider` con el valor de `localstack` si se desea simular servicios de aws sin costo.
 4. Ubicarse en la carpeta `infra` y ejecutar respectivamente `terraform init` y luego `terraform apply -auto-approve`.
+
+## Validar la creacion de infrastructura localstack:
+1. lista tablas de dynamoDb `aws dynamodb list-tables --endpoint-url=http://localhost:4566`
+2. listar parametros `aws ssm describe-parameters --endpoint-url=http://localhost:4566`
+3. listar bucket despliegue `aws s3 ls --endpoint-url=http://localhost:4566`
 
 ## Pasos para la aplicacion:
 1. Ubicarse en la carpeta `backend` y ejecutar `npm install`, para instalar dependencias.
-2. Renombrar el archivo `.env.example` a `.env` y copiar los siguientes valores dentro del mismo.
+2. Ubicarse en el archivo `serverless.ts` y en `provider.environment` ingresar los siguientes valores:
     ```
-    ENV="development"
-    PORT=3000
-    DB_DYNAMO_ENDPOINT="http://localhost:4566"
-    DB_DYNAMO_TABLE="PeopleTable"
-    REGION="us-east-1"
-    SWAPI_URL="https://swapi.py4e.com/api"
+     environment: {
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+      NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
+      ENV: "${self:provider.stage}",
+      DB_DYNAMO_ENDPOINT: "http://localhost:4566",
+      DB_DYNAMO_TABLE: "peopleTable-${self:provider.stage}",
+      REGION: "us-east-1",
+      SWAPI_URL: "https://swapi.py4e.com/api"
+    },
     ```
 
 3. Ejecutar `npm run start:dev` para iniciar el proyecto serverless en modo `offline`.
@@ -32,9 +48,22 @@
 ## Deploy en AWS
 0. Clonar el repositorio
 
+## Configuracion AWS
+1. Ejecutar `aws configure --profile NOMBRE_DEL_PERFIL` donde "NOMBRE_DEL_PERFIL" es el perfil de la cuenta de despliegue en aws.
+2. Ingresar las credenciales respectivas : 
+    - access_key
+    - secret_key
+    - region
+    - ouput format
+
 ## Pasos para la infrastructura: 
 1. Ubicarse en la carpeta `infra` y completar las variables con credenciales respectivas.
 2. Ejecutar `terraform init` y seguidamente `terraform apply -auto-approve`.
+
+## Validar la creacion de infrastructura aws:
+1. lista tablas de dynamoDb `aws dynamodb list-tables --profile NOMBRE_DEL_PERFIL`
+2. listar parametros `aws ssm describe-parameters --profile NOMBRE_DEL_PERFIL`
+3. listar bucket despliegue `aws s3 ls --profile NOMBRE_DEL_PERFIL`
 
 ## Pasos para la aplicacion:
 1. Ubicarse en la carpeta `backend` y ejecutar `npm install`, para instalar dependencias.

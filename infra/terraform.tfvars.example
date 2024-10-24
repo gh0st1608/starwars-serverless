@@ -12,3 +12,6 @@ bucket_name = "example-bucket-name"
 
 # Environment
 stage="example-env" # "dev" "stg" "prod"
+
+#Generator service
+provider="localstack" # "aws" si es propiamente aws  o "localstack" si es un simulador de aws
