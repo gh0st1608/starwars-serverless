@@ -1,4 +1,3 @@
-
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -6,18 +5,18 @@
       "message": {
         "type": "string",
         "description": "Un mensaje que describe el status.",
-        "example": "operation success"
+        "example": "operation failed"
       },
       "code": {
         "type": "integer",
         "description": "Codigo de status HTTP que representa el status.",
-        "example": 200
+        "example": 400
       },
       "status": {
         "type": "string",
-        "description": "La solicitud se realizó correctamente.",
-        "example": "success"
+        "description": "El servidor no puede o no quiere procesar la solicitud",
+        "example": "bad request"
       }
     },
     "required": ["message", "code", "status"]
-}
+  }

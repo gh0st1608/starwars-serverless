@@ -23,6 +23,8 @@ backend/build/
 backend/.serverless/
 backend/.env
 backend/openapi.yml
+backend/notas.txt
+backend/coverage/
 
 infra/.terraform
 infra/terraform.tfstate.backup

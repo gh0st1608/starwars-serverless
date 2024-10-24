@@ -2,18 +2,20 @@ import { FindList } from "../core/interfaces";
 import { People } from "../domain/people";
 import { PeopleRepository } from "../domain/repositories/people.repository";
 import { DynamoDBRepository } from "../infrastructure/dynamodb.infrastructure";
+import { Result } from 'neverthrow';
 
 export class PeopleApplication {
   constructor(private peopleRepository: PeopleRepository, private dynamoDBRepository : DynamoDBRepository) {}
 
-  async get() : Promise<FindList<People>> {
+  async get() : Promise<Result<FindList<People>,Error>> {
     return this.peopleRepository.get();
   }
 
-  async getOne(id : string) : Promise<People> {
+  async getOne(id : string) : Promise<Result<People,Error>> {
     const itemFind = await this.dynamoDBRepository.getItem(id)
-    if(!itemFind) return this.peopleRepository.getOne(id);
-    return itemFind
+    if(itemFind.isOk()) return itemFind
+    return this.peopleRepository.getOne(id);
+    
   }
 
   async getSchema() {

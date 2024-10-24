@@ -11,9 +11,15 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jest", "node"]
   },
-  "include": ["src/**/*.ts", "serverless.ts"],
+  "include": ["src/**/*.ts", "serverless.ts","__tests__/**/*"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",

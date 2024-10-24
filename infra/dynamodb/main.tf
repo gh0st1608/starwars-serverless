@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "people" {
- name = "PeopleTable"
+ name = "peopleTable-${var.dynamo_stage}"
  billing_mode = "PROVISIONED"
  read_capacity = 10
  write_capacity = 5
@@ -13,6 +13,6 @@ resource "aws_dynamodb_table" "people" {
   }
 
  tags = {
-   Name = "PeopleTable-Swapi"
+   Name = "peopleTable-Swapi"
  }
 }

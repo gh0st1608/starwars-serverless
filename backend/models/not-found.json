@@ -4,18 +4,18 @@
     "properties": {
       "message": {
         "type": "string",
-        "description": "A message describing the error.",
+        "description": "Un mensaje que describe el status.",
         "example": "operation failed"
       },
       "code": {
         "type": "integer",
-        "description": "HTTP status code representing the error.",
-        "example": 500
+        "description": "Codigo de status HTTP que representa el status.",
+        "example": 404
       },
       "status": {
         "type": "string",
-        "description": "Status of the response, e.g., 'fail' or 'error'.",
-        "example": "fail"
+        "description": "El servidor no puede procesar la solicitud debido a un error del cliente.",
+        "example": "not found"
       }
     },
     "required": ["message", "code", "status"]

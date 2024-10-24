@@ -1,9 +1,20 @@
 resource "aws_s3_bucket" "bucket" {
-    bucket = "bucket-swapi-${var.s3_stage}" 
+    bucket = "bucket-swapi-${var.s3_stage}"
+    lifecycle {
+      prevent_destroy = false
+  } 
     tags = {
       Name = "S3-Swapi"
  }
 }
+
+/* resource "null_resource" "empty_bucket" {
+  provisioner "local-exec" {
+    command = "aws s3 rm s3://${aws_s3_bucket.my_bucket.bucket} --recursive"
+  }
+
+  depends_on = [aws_s3_bucket.bucket]
+} */
 
 resource "aws_s3_bucket_acl" "example_bucket_acl" {
 
