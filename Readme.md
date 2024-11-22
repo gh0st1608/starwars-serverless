@@ -19,7 +19,7 @@
 ## Pasos para la infrastructura: 
 1. Ubicarse en la raiz del proyecto y ejecutar `docker-compose up -d`, esto creara localmente con `localstack` los servicios de dynamodb, s3 y ssm.
 2. Descomentar la seccion comentada del archivo `providers.tf` y segiudamente comentar la seccion `terraform` del mismo archivo.
-3. Renombrar el archivo `terraform.tfvars.example` a `terraform.tfvars` y completar las variables `access_key` y `secret_key` con el valor de `test` en ambos casos, `region` con el valor `us-east-1`, adicionalmente completar `stage` con el valor `dev` y `provider` con el valor de `localstack` si se desea simular servicios de aws sin costo.
+3. Renombrar el archivo `terraform.tfvars.example` a `terraform.tfvars` y completar las variables `access_key` y `secret_key` con el valor de `test` en ambos casos, `region` con el valor `us-east-1`, adicionalmente completar `stage` con el valor `dev` y `service` con el valor de `localstack` si se desea simular servicios de aws sin costo.
 4. Ubicarse en la carpeta `infra` y ejecutar respectivamente `terraform init` y luego `terraform apply -auto-approve`.
 
 ## Validar la creacion de infrastructura localstack:
