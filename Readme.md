@@ -116,3 +116,6 @@ curl -X POST http://localhost:3000/api/dev/people \
 
 ## Pruebas Unitarias
 1. Ubicarse en la carpeta `backend` y ejecutar `npm run test`
+
+## NOTAS
+1. En caso de que al ejecutar el despliegue en aws con cuenta respectiva con el comando `npm run deploy:stg` salga un aviso de `ServerlessError2: Serverless plugin "serverless-offline" not found` por favor ejecutar el comando `npm install serverless-offline --save-dev`. Luego de ello ya se podra desplegar sin problema alguno en la nube y generara los endpoints respectivos. Recordar que primero necesita crear la infraestructura con terraform segun los pasos del readme.md
